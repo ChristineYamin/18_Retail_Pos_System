@@ -7,7 +7,7 @@ class SaleItem(BaseModel):
 
 
 class SaleCreate(BaseModel):
-    items: list[SaleItem]
+    items: list[SaleItem] = Field(min_length=1)
     discount: float = Field(default=0, ge=0)
     payment_method: str
     amount_paid: float = Field(ge=0)

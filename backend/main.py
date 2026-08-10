@@ -4,6 +4,8 @@ from backend.database import get_connection
 from backend.schemas import SaleCreate
 from fastapi import HTTPException
 
+from fastapi.staticfiles import StaticFiles
+
 app = FastAPI()
 
 
@@ -199,3 +201,9 @@ def create_sale(sale: SaleCreate):
 
     finally:
         conn.close()
+
+app.mount(
+    "/pos",
+    StaticFiles(directory="frontend", html=True),
+    name="pos"
+)

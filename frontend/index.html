@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Retail POS</title>
+
+    <link rel="stylesheet" href="/pos/style.css">
+</head>
+
+<body>
+
+    <header>
+        <h1>Retail POS</h1>
+        <p>New Sale</p>
+    </header>
+
+
+    <main class="pos-container">
+
+        <!-- LEFT SIDE -->
+        <section class="products-section">
+
+            <h2>Products</h2>
+
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Search product..."
+            >
+
+            <div id="productList" class="product-grid">
+                <!-- Products will come from PostgreSQL -->
+            </div>
+
+        </section>
+
+
+        <!-- RIGHT SIDE -->
+        <section class="cart-section">
+
+            <h2>Current Sale</h2>
+
+            <div id="cartList">
+                <p class="empty-cart">
+                    No items added yet.
+                </p>
+            </div>
+
+
+            <!-- SUMMARY -->
+            <div class="summary">
+
+                <div>
+                    <span>Subtotal</span>
+                    <strong id="subtotal">
+                        0 MMK
+                    </strong>
+                </div>
+
+            </div>
+
+
+            <!-- CHECKOUT -->
+            <div class="checkout">
+
+                <label for="discountInput">
+                    Discount
+                </label>
+
+                <input
+                    type="number"
+                    id="discountInput"
+                    value="0"
+                    min="0"
+                >
+
+
+                <label for="paymentMethod">
+                    Payment Method
+                </label>
+
+                <select id="paymentMethod">
+                    <option value="Cash">Cash</option>
+                    <option value="KBZPay">KBZPay</option>
+                    <option value="WavePay">WavePay</option>
+                </select>
+
+
+                <label for="amountPaidInput">
+                    Amount Received
+                </label>
+
+                <input
+                    type="number"
+                    id="amountPaidInput"
+                    min="0"
+                    placeholder="Enter amount received"
+                >
+
+
+                <div class="checkout-row">
+
+                    <span>Total</span>
+
+                    <strong id="grandTotal">
+                        0 MMK
+                    </strong>
+
+                </div>
+
+
+                <div class="checkout-row">
+
+                    <span>Change</span>
+
+                    <strong id="changeAmount">
+                        0 MMK
+                    </strong>
+
+                </div>
+
+
+                <button id="payButton">
+                    PAY
+                </button>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script src="/pos/app.js"></script>
+
+</body>
+
+</html>
