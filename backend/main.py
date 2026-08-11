@@ -93,6 +93,7 @@ def create_sale(sale: SaleCreate):
 
                     sale_items.append({
                         "product_id": item.product_id,
+                        "product_name": product_name,
                         "quantity": item.quantity,
                         "unit_price": unit_price,
                         "line_total": line_total
@@ -138,7 +139,7 @@ def create_sale(sale: SaleCreate):
                         change_amount
                     )
                     VALUES (%s, %s, %s, %s, %s, %s, %s)
-                    RETURNING sale_id
+                    RETURNING sale_id, sale_datetime
                     """,
                     (
                         invoice_no,
@@ -151,7 +152,10 @@ def create_sale(sale: SaleCreate):
                     )
                 )
 
-                sale_id = cursor.fetchone()[0]
+                sale_row = cursor.fetchone()
+                sale_id = sale_row[0]
+                sale_datetime = sale_row[1]
+
 
                 # 6. Save each item + reduce stock
                 for item in sale_items:
@@ -191,6 +195,8 @@ def create_sale(sale: SaleCreate):
                 return {
                     "message": "Sale completed",
                     "invoice_no": invoice_no,
+                    "sale_datetime": sale_datetime,
+                    "items": sale_items,
                     "subtotal": subtotal,
                     "discount": sale.discount,
                     "grand_total": grand_total,

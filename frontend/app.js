@@ -322,12 +322,7 @@ async function completeSale() {
             return;
         }
 
-        alert(
-            `Sale completed!\n\n` +
-            `Invoice: ${result.invoice_no}\n` +
-            `Total: ${result.grand_total.toLocaleString()} MMK\n` +
-            `Change: ${result.change_amount.toLocaleString()} MMK`
-        );
+        showReceipt(result);
 
         // Reset sale
         cart = [];
@@ -352,6 +347,93 @@ async function completeSale() {
         payButton.textContent = "PAY";
     }
 }
+
+function showReceipt(result) {
+
+    const saleDate = new Date(result.sale_datetime);
+
+    document.getElementById("receiptInvoice").textContent =
+        result.invoice_no;
+
+    document.getElementById("receiptDate").textContent =
+        saleDate.toLocaleDateString();
+
+    document.getElementById("receiptTime").textContent =
+        saleDate.toLocaleTimeString();
+
+
+    const receiptItems =
+        document.getElementById("receiptItems");
+
+    receiptItems.innerHTML = "";
+
+
+    result.items.forEach(item => {
+
+        const element = document.createElement("div");
+
+        element.className = "receipt-item";
+
+        element.innerHTML = `
+            <div class="receipt-item-name">
+                ${item.product_name}
+            </div>
+
+            <div class="receipt-item-details">
+                <span>
+                    ${item.quantity}
+                    ×
+                    ${item.unit_price.toLocaleString()}
+                </span>
+
+                <span>
+                    ${item.line_total.toLocaleString()} MMK
+                </span>
+            </div>
+        `;
+
+        receiptItems.appendChild(element);
+    });
+
+
+    document.getElementById("receiptSubtotal").textContent =
+        result.subtotal.toLocaleString() + " MMK";
+
+    document.getElementById("receiptDiscount").textContent =
+        result.discount.toLocaleString() + " MMK";
+
+    document.getElementById("receiptGrandTotal").textContent =
+        result.grand_total.toLocaleString() + " MMK";
+
+    document.getElementById("receiptPaid").textContent =
+        result.amount_paid.toLocaleString() + " MMK";
+
+    document.getElementById("receiptChange").textContent =
+        result.change_amount.toLocaleString() + " MMK";
+
+    document.getElementById("receiptPayment").textContent =
+        result.payment_method;
+
+
+    document
+        .getElementById("receiptModal")
+        .classList.add("show");
+}
+
+document
+    .getElementById("closeReceiptButton")
+    .addEventListener("click", function () {
+
+        document
+            .getElementById("receiptModal")
+            .classList.remove("show");
+    });
+
+document
+    .getElementById("printReceiptButton")
+    .addEventListener("click", function () {
+        window.print();
+    });
 
 
 // ========================================

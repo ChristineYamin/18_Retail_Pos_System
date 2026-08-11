@@ -133,6 +133,88 @@
 
     </main>
 
+    <!-- RECEIPT MODAL -->
+
+<div id="receiptModal" class="receipt-modal">
+
+    <div class="receipt">
+
+        <div class="receipt-header">
+            <h2>SHOP NAME</h2>
+            <p>Sales Receipt</p>
+        </div>
+
+        <div class="receipt-info">
+            <p>
+                Invoice:
+                <span id="receiptInvoice"></span>
+            </p>
+
+            <p>
+                Date:
+                <span id="receiptDate"></span>
+            </p>
+
+            <p>
+                Time:
+                <span id="receiptTime"></span>
+            </p>
+        </div>
+
+        <hr>
+
+        <div id="receiptItems"></div>
+
+        <hr>
+
+        <div class="receipt-total-row">
+            <span>Subtotal</span>
+            <span id="receiptSubtotal"></span>
+        </div>
+
+        <div class="receipt-total-row">
+            <span>Discount</span>
+            <span id="receiptDiscount"></span>
+        </div>
+
+        <div class="receipt-total-row receipt-grand-total">
+            <span>TOTAL</span>
+            <span id="receiptGrandTotal"></span>
+        </div>
+
+        <div class="receipt-total-row">
+            <span>Paid</span>
+            <span id="receiptPaid"></span>
+        </div>
+
+        <div class="receipt-total-row">
+            <span>Change</span>
+            <span id="receiptChange"></span>
+        </div>
+
+        <div class="receipt-total-row">
+            <span>Payment</span>
+            <span id="receiptPayment"></span>
+        </div>
+
+        <p class="receipt-thanks">
+            Thank you
+        </p>
+
+        <div class="receipt-buttons">
+            <button id="printReceiptButton">
+                PRINT
+            </button>
+
+            <button id="closeReceiptButton">
+                CLOSE
+            </button>
+        </div>
+
+    </div>
+
+</div>
+
 
     <script src="/pos/app.js"></script>
 
