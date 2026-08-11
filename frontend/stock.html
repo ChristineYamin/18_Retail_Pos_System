@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Stock Management</title>
+
+    <link rel="stylesheet" href="/pos/style.css">
+</head>
+
+<body>
+
+    <header class="history-header">
+
+        <div>
+            <h1>Stock Management</h1>
+            <p>Manage product inventory</p>
+        </div>
+
+        <a href="/pos/" class="back-button">
+            ← New Sale
+        </a>
+
+    </header>
+
+
+    <main class="stock-container">
+
+        <input
+            type="text"
+            id="stockSearch"
+            placeholder="Search product..."
+        >
+
+
+        <div class="stock-table-wrapper">
+
+            <table class="stock-table">
+
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Price</th>
+                        <th>Current Stock</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody id="stockTableBody">
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </main>
+
+
+    <!-- RESTOCK MODAL -->
+
+    <div id="restockModal" class="receipt-modal">
+
+        <div class="restock-box">
+
+            <h2>Restock Product</h2>
+
+            <p id="restockProductName"></p>
+
+            <p>
+                Current Stock:
+                <strong id="restockCurrentStock"></strong>
+            </p>
+
+            <label for="restockQuantity">
+                Quantity to Add
+            </label>
+
+            <input
+                type="number"
+                id="restockQuantity"
+                min="1"
+                placeholder="Enter quantity"
+            >
+
+
+            <div class="receipt-buttons">
+
+                <button id="confirmRestockButton">
+                    UPDATE
+                </button>
+
+                <button id="cancelRestockButton">
+                    CANCEL
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <script src="/pos/stock.js"></script>
+
+</body>
+
+</html>
