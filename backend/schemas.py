@@ -11,3 +11,6 @@ class SaleCreate(BaseModel):
     discount: float = Field(default=0, ge=0)
     payment_method: str
     amount_paid: float = Field(ge=0)
+
+class StockUpdate(BaseModel):
+    quantity: int = Field(gt=0)
