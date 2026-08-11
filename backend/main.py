@@ -46,6 +46,127 @@ def get_products():
 
     return products
 
+@app.get("/sales")
+def get_sales():
+
+    conn = get_connection()
+
+    try:
+        with conn.cursor() as cursor:
+
+            cursor.execute("""
+                SELECT
+                    sale_id,
+                    invoice_no,
+                    sale_datetime,
+                    grand_total,
+                    payment_method
+                FROM sales
+                ORDER BY sale_datetime DESC;
+            """)
+
+            rows = cursor.fetchall()
+
+            sales = []
+
+            for row in rows:
+                sales.append({
+                    "sale_id": row[0],
+                    "invoice_no": row[1],
+                    "sale_datetime": row[2],
+                    "grand_total": float(row[3]),
+                    "payment_method": row[4]
+                })
+
+            return sales
+
+    finally:
+        conn.close()
+
+@app.get("/sales/{sale_id}")
+def get_sale_detail(sale_id: int):
+
+    conn = get_connection()
+
+    try:
+        with conn.cursor() as cursor:
+
+            # Get invoice information
+            cursor.execute(
+                """
+                SELECT
+                    sale_id,
+                    invoice_no,
+                    sale_datetime,
+                    subtotal,
+                    discount,
+                    grand_total,
+                    payment_method,
+                    amount_paid,
+                    change_amount
+                FROM sales
+                WHERE sale_id = %s;
+                """,
+                (sale_id,)
+            )
+
+            sale = cursor.fetchone()
+
+            if sale is None:
+                raise HTTPException(
+                    status_code=404,
+                    detail="Sale not found"
+                )
+
+
+            # Get products inside the invoice
+            cursor.execute(
+                """
+                SELECT
+                    si.product_id,
+                    p.product_name,
+                    si.quantity,
+                    si.unit_price,
+                    si.line_total
+                FROM sale_items si
+                JOIN products p
+                    ON si.product_id = p.product_id
+                WHERE si.sale_id = %s
+                ORDER BY si.sale_item_id;
+                """,
+                (sale_id,)
+            )
+
+            rows = cursor.fetchall()
+
+            items = []
+
+            for row in rows:
+                items.append({
+                    "product_id": row[0],
+                    "product_name": row[1],
+                    "quantity": row[2],
+                    "unit_price": float(row[3]),
+                    "line_total": float(row[4])
+                })
+
+
+            return {
+                "sale_id": sale[0],
+                "invoice_no": sale[1],
+                "sale_datetime": sale[2],
+                "subtotal": float(sale[3]),
+                "discount": float(sale[4]),
+                "grand_total": float(sale[5]),
+                "payment_method": sale[6],
+                "amount_paid": float(sale[7]),
+                "change_amount": float(sale[8]),
+                "items": items
+            }
+
+    finally:
+        conn.close()
+
 @app.post("/sales")
 def create_sale(sale: SaleCreate):
 

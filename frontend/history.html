@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Sales History</title>
+
+    <link rel="stylesheet" href="/pos/style.css">
+</head>
+
+<body>
+
+    <header class="history-header">
+
+        <div>
+            <h1>Sales History</h1>
+            <p>Previous transactions</p>
+        </div>
+
+        <a href="/pos/" class="back-button">
+            ← New Sale
+        </a>
+
+    </header>
+
+
+    <main class="history-container">
+
+        <input
+            type="text"
+            id="historySearch"
+            placeholder="Search invoice..."
+        >
+
+        <div class="history-table-wrapper">
+
+            <table class="history-table">
+
+                <thead>
+                    <tr>
+                        <th>Invoice</th>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Payment</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+
+                <tbody id="salesHistoryBody">
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </main>
+
+
+    <!-- SALE DETAIL MODAL -->
+
+    <div id="saleDetailModal" class="receipt-modal">
+
+        <div class="receipt">
+
+            <div class="receipt-header">
+                <h2>Sale Details</h2>
+            </div>
+
+
+            <div class="receipt-info">
+
+                <p>
+                    Invoice:
+                    <span id="detailInvoice"></span>
+                </p>
+
+                <p>
+                    Date:
+                    <span id="detailDate"></span>
+                </p>
+
+                <p>
+                    Time:
+                    <span id="detailTime"></span>
+                </p>
+
+            </div>
+
+
+            <hr>
+
+            <div id="detailItems"></div>
+
+            <hr>
+
+
+            <div class="receipt-total-row">
+                <span>Subtotal</span>
+                <span id="detailSubtotal"></span>
+            </div>
+
+
+            <div class="receipt-total-row">
+                <span>Discount</span>
+                <span id="detailDiscount"></span>
+            </div>
+
+
+            <div class="receipt-total-row receipt-grand-total">
+                <span>TOTAL</span>
+                <span id="detailGrandTotal"></span>
+            </div>
+
+
+            <div class="receipt-total-row">
+                <span>Paid</span>
+                <span id="detailPaid"></span>
+            </div>
+
+
+            <div class="receipt-total-row">
+                <span>Change</span>
+                <span id="detailChange"></span>
+            </div>
+
+
+            <div class="receipt-total-row">
+                <span>Payment</span>
+                <span id="detailPayment"></span>
+            </div>
+
+
+            <div class="receipt-buttons">
+
+                <button
+                    id="reprintButton"
+                    type="button"
+                >
+                    REPRINT
+                </button>
+
+                <button
+                    id="closeDetailButton"
+                    type="button"
+                >
+                    CLOSE
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <script src="/pos/history.js"></script>
+
+</body>
+
+</html>
