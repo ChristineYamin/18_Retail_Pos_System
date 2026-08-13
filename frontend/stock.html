@@ -104,6 +104,48 @@
 
     </div>
 
+    <!-- EDIT PRICE MODAL -->
+
+<div id="priceModal" class="receipt-modal">
+
+    <div class="restock-box">
+
+        <h2>Edit Price</h2>
+
+        <p id="priceProductName"></p>
+
+        <p>
+            Current Price:
+            <strong id="currentPrice"></strong>
+        </p>
+
+        <label for="newPrice">
+            New Selling Price
+        </label>
+
+        <input
+            type="number"
+            id="newPrice"
+            min="1"
+            placeholder="Enter new price"
+        >
+
+        <div class="receipt-buttons">
+
+            <button id="savePriceButton">
+                SAVE PRICE
+            </button>
+
+            <button id="cancelPriceButton">
+                CANCEL
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
 
     <script src="/pos/stock.js"></script>
 

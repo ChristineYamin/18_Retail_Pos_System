@@ -1,7 +1,7 @@
 let stockProducts = [];
 let selectedProduct = null;
 let stockAction = "restock";
-
+let selectedPriceProduct = null;
 
 // ========================================
 // LOAD PRODUCTS
@@ -81,7 +81,11 @@ function displayStockProducts(products) {
                 >
                     Set Stock
                 </button>
-                
+                <button
+                    class="edit-price-button" >
+                    Edit Price
+                </button>
+        
                 </div>
             </td>`
 
@@ -99,6 +103,12 @@ function displayStockProducts(products) {
             .addEventListener(
                  "click",
                 () => openSetStockModal(product)
+            );
+        row
+            .querySelector(".edit-price-button")
+            .addEventListener(
+                "click",
+                 () => openPriceModal(product)
             );
         
 
@@ -291,6 +301,125 @@ async function updateStock() {
 }
 
 // ========================================
+// Add the price functions
+// ========================================
+function openPriceModal(product) {
+
+    selectedPriceProduct = product;
+
+    document.getElementById("priceProductName").textContent =
+        product.product_name;
+
+    document.getElementById("currentPrice").textContent =
+        product.selling_price.toLocaleString() + " MMK";
+
+    document.getElementById("newPrice").value =
+        product.selling_price;
+
+    document
+        .getElementById("priceModal")
+        .classList.add("show");
+}
+
+
+function closePriceModal() {
+
+    selectedPriceProduct = null;
+
+    document
+        .getElementById("priceModal")
+        .classList.remove("show");
+}
+
+async function updatePrice() {
+
+    if (!selectedPriceProduct) {
+        return;
+    }
+
+    const newPrice =
+        Number(
+            document.getElementById("newPrice").value
+        );
+
+    if (
+        !Number.isInteger(newPrice) ||
+        newPrice <= 0
+    ) {
+
+        alert("Please enter a valid price.");
+
+        return;
+    }
+
+    const button =
+        document.getElementById("savePriceButton");
+
+    try {
+
+        button.disabled = true;
+        button.textContent = "Saving...";
+
+        const endpoint =
+            "/products/" +
+            selectedPriceProduct.product_id +
+            "/price";
+
+        const response = await fetch(
+            endpoint,
+            {
+                method: "PATCH",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify({
+                    selling_price: newPrice
+                })
+            }
+        );
+
+        const result =
+            await response.json();
+
+        if (!response.ok) {
+
+            alert(
+                result.detail ||
+                "Unable to update price."
+            );
+
+            return;
+        }
+
+        alert(
+            result.product_name +
+            "\n\nNew Price: " +
+            result.selling_price.toLocaleString() +
+            " MMK"
+        );
+
+        closePriceModal();
+
+        await loadStockProducts();
+
+    } catch (error) {
+
+        console.error(error);
+
+        alert("Unable to update price.");
+
+    } finally {
+
+        button.disabled = false;
+        button.textContent = "SAVE PRICE";
+    }
+}
+
+
+
+// ========================================
 // SEARCH
 // ========================================
 
@@ -330,6 +459,13 @@ document
     .getElementById("cancelRestockButton")
     .addEventListener("click", closeRestockModal);
 
+document
+    .getElementById("savePriceButton")
+    .addEventListener("click", updatePrice);
+
+document
+    .getElementById("cancelPriceButton")
+    .addEventListener("click", closePriceModal);
 
 // ========================================
 // START

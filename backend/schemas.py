@@ -17,3 +17,6 @@ class StockUpdate(BaseModel):
 
 class StockSet(BaseModel):
     quantity: int = Field(ge=0)
+
+class PriceUpdate(BaseModel):
+    selling_price: int = Field(gt=0)

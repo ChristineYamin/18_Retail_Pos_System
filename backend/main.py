@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from backend.database import get_connection
 
-from backend.schemas import SaleCreate, StockUpdate, StockSet
+from backend.schemas import SaleCreate, StockUpdate, StockSet, PriceUpdate
 from fastapi import HTTPException
 
 from fastapi.staticfiles import StaticFiles
@@ -137,6 +137,57 @@ def set_stock(product_id: str, stock: StockSet):
 
     finally:
         conn.close()
+
+@app.patch("/products/{product_id}/price")
+def update_product_price(
+    product_id: str,
+    price: PriceUpdate
+):
+
+    conn = get_connection()
+
+    try:
+        with conn:
+            with conn.cursor() as cursor:
+
+                cursor.execute(
+                    """
+                    UPDATE products
+                    SET selling_price = %s
+                    WHERE product_id = %s
+                    RETURNING
+                        product_id,
+                        product_name,
+                        selling_price;
+                    """,
+                    (
+                        price.selling_price,
+                        product_id
+                    )
+                )
+
+                product = cursor.fetchone()
+
+                if product is None:
+                    raise HTTPException(
+                        status_code=404,
+                        detail="Product not found"
+                    )
+
+                return {
+                    "message": "Price updated successfully",
+                    "product_id": product[0],
+                    "product_name": product[1],
+                    "selling_price": float(product[2])
+                }
+
+    finally:
+        conn.close()
+
+
+
+
+
 @app.get("/sales")
 def get_sales():
 

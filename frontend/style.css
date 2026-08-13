@@ -616,6 +616,33 @@ header p {
     color: #222;
 }
 
+/* ========================================
+   Edit Price Modal
+======================================== */
+
+.edit-price-button {
+    padding: 8px 14px;
+    border: 1px solid #222;
+    border-radius: 6px;
+    cursor: pointer;
+    background: white;
+    color: #222;
+}
+
+#savePriceButton,
+#cancelPriceButton {
+    flex: 1;
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+#savePriceButton {
+    background: #222;
+    color: white;
+}
+
 
 
 /* ========================================
