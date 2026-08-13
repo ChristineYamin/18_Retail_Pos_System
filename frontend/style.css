@@ -602,6 +602,20 @@ header p {
     color: white;
 }
 
+.stock-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.set-stock-button {
+    padding: 8px 14px;
+    border: 1px solid #222;
+    border-radius: 6px;
+    cursor: pointer;
+    background: white;
+    color: #222;
+}
+
 
 
 /* ========================================

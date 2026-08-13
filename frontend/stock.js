@@ -1,5 +1,6 @@
 let stockProducts = [];
 let selectedProduct = null;
+let stockAction = "restock";
 
 
 // ========================================
@@ -69,14 +70,22 @@ function displayStockProducts(products) {
             </td>
 
             <td>
-                <button
-                    class="restock-button"
-                    data-id="${product.product_id}"
-                >
-                    Restock
+               <div class="stock-actions">
+                  <button
+                       class="restock-button"
+                    >
+                       Restock
                 </button>
-            </td>
-        `;
+                <button
+                    class="set-stock-button"
+                >
+                    Set Stock
+                </button>
+                
+                </div>
+            </td>`
+
+           
 
 
         row
@@ -85,10 +94,18 @@ function displayStockProducts(products) {
                 "click",
                 () => openRestockModal(product)
             );
+        row
+            .querySelector(".set-stock-button")
+            .addEventListener(
+                 "click",
+                () => openSetStockModal(product)
+            );
+        
 
 
         container.appendChild(row);
-    });
+    })
+    ;
 }
 
 
@@ -99,6 +116,13 @@ function displayStockProducts(products) {
 function openRestockModal(product) {
 
     selectedProduct = product;
+    stockAction = "restock";
+
+    document.getElementById("restockModalTitle").textContent =
+        "Restock Product";
+
+    document.getElementById("restockQuantityLabel").textContent =
+        "Quantity to Add";
 
     document.getElementById("restockProductName").textContent =
         product.product_name;
@@ -108,12 +132,42 @@ function openRestockModal(product) {
 
     document.getElementById("restockQuantity").value = "";
 
+    document.getElementById("confirmRestockButton").textContent =
+        "UPDATE";
+
 
     document
         .getElementById("restockModal")
         .classList.add("show");
 }
 
+function openSetStockModal(product) {
+
+    selectedProduct = product;
+    stockAction = "set";
+
+    document.getElementById("restockModalTitle").textContent =
+        "Set Stock";
+
+    document.getElementById("restockQuantityLabel").textContent =
+        "Actual Stock Quantity";
+
+    document.getElementById("restockProductName").textContent =
+        product.product_name;
+
+    document.getElementById("restockCurrentStock").textContent =
+        product.current_stock;
+
+    document.getElementById("restockQuantity").value = "";
+
+    document.getElementById("confirmRestockButton").textContent =
+        "SET STOCK";
+
+
+    document
+        .getElementById("restockModal")
+        .classList.add("show");
+}
 
 // ========================================
 // CLOSE MODAL
@@ -139,33 +193,55 @@ async function updateStock() {
         return;
     }
 
+    const rawQuantity =
+        document
+            .getElementById("restockQuantity")
+            .value
+            .trim();
 
-    const quantity =
-        Number(
-            document.getElementById("restockQuantity").value
-        );
-
-
-    if (!quantity || quantity <= 0) {
-
-        alert("Please enter a valid quantity.");
-
+    if (rawQuantity === "") {
+        alert("Please enter a quantity.");
         return;
     }
 
+    const quantity = Number(rawQuantity);
+
+    if (
+        !Number.isInteger(quantity) ||
+        quantity < 0 ||
+        (stockAction === "restock" && quantity === 0)
+    ) {
+        alert("Please enter a valid quantity.");
+        return;
+    }
 
     const button =
         document.getElementById("confirmRestockButton");
-
 
     try {
 
         button.disabled = true;
         button.textContent = "Updating...";
 
+        let endpoint;
+
+        if (stockAction === "restock") {
+
+            endpoint =
+                "/products/" +
+                selectedProduct.product_id +
+                "/stock";
+
+        } else {
+
+            endpoint =
+                "/products/" +
+                selectedProduct.product_id +
+                "/stock/set";
+        }
 
         const response = await fetch(
-            `/products/${selectedProduct.product_id}/stock`,
+            endpoint,
             {
                 method: "PATCH",
 
@@ -179,10 +255,7 @@ async function updateStock() {
             }
         );
 
-
-        const result =
-            await response.json();
-
+        const result = await response.json();
 
         if (!response.ok) {
 
@@ -194,17 +267,15 @@ async function updateStock() {
             return;
         }
 
-
         alert(
-            `${result.product_name}\n\n` +
-            `New Stock: ${result.current_stock}`
+            result.product_name +
+            "\n\nCurrent Stock: " +
+            result.current_stock
         );
-
 
         closeRestockModal();
 
         await loadStockProducts();
-
 
     } catch (error) {
 
@@ -218,7 +289,6 @@ async function updateStock() {
         button.textContent = "UPDATE";
     }
 }
-
 
 // ========================================
 // SEARCH
@@ -246,6 +316,7 @@ document
     });
 
 
+
 // ========================================
 // BUTTONS
 // ========================================
@@ -260,5 +331,8 @@ document
     .addEventListener("click", closeRestockModal);
 
 
-// Start
+// ========================================
+// START
+// ========================================
+
 loadStockProducts();

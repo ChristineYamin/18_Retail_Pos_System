@@ -137,13 +137,6 @@ def set_stock(product_id: str, stock: StockSet):
 
     finally:
         conn.close()
-
-
-
-
-
-
-
 @app.get("/sales")
 def get_sales():
 
