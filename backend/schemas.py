@@ -14,3 +14,6 @@ class SaleCreate(BaseModel):
 
 class StockUpdate(BaseModel):
     quantity: int = Field(gt=0)
+
+class StockSet(BaseModel):
+    quantity: int = Field(ge=0)
