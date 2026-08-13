@@ -1,9 +1,38 @@
 let products = [];
 let cart = [];
 
+let selectedProductGroup = "ALL";
+
 let currentSubtotal = 0;
 let currentGrandTotal = 0;
 
+// ========================================
+// Add Category Button logic
+// ========================================
+document
+    .querySelectorAll(".category-button")
+    .forEach(button => {
+
+        button.addEventListener("click", function () {
+
+            selectedProductGroup =
+                this.dataset.group;
+
+
+            document
+                .querySelectorAll(".category-button")
+                .forEach(btn =>
+                    btn.classList.remove("active")
+                );
+
+
+            this.classList.add("active");
+
+
+            filterProducts();
+        });
+
+    });
 
 // ========================================
 // LOAD PRODUCTS
@@ -65,6 +94,43 @@ function displayProducts(productList) {
     });
 }
 
+// ========================================
+// Filter Products
+// ========================================
+
+function filterProducts() {
+
+    const search =
+        document
+            .getElementById("searchInput")
+            .value
+            .trim()
+            .toLowerCase();
+
+
+    const filtered =
+        products.filter(product => {
+
+            const matchesSearch =
+                product.product_name
+                    .toLowerCase()
+                    .includes(search) ||
+                product.product_id
+                    .toLowerCase()
+                    .includes(search);
+
+
+            const matchesGroup =
+                selectedProductGroup === "ALL" ||
+                product.product_group_code === selectedProductGroup;
+
+
+            return matchesSearch && matchesGroup;
+        });
+
+
+    displayProducts(filtered);
+}
 
 // ========================================
 // ADD PRODUCT TO CART
@@ -466,20 +532,7 @@ document
 
 document
     .getElementById("searchInput")
-    .addEventListener("input", function () {
-
-        const search =
-            this.value.trim().toLowerCase();
-
-        const filteredProducts =
-            products.filter(product =>
-                product.product_name
-                    .toLowerCase()
-                    .includes(search)
-            );
-
-        displayProducts(filteredProducts);
-    });
+    .addEventListener("input", filterProducts);
 
 
 // ========================================

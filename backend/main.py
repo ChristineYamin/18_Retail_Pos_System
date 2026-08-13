@@ -24,8 +24,12 @@ def get_products():
             product_id,
             product_name,
             selling_price,
-            current_stock
+            current_stock,
+            supplier_code,
+            product_group_code
+
         FROM products
+        WHERE status = 'Active'
         ORDER BY product_id;
     """)
 
@@ -41,7 +45,9 @@ def get_products():
             "product_id": row[0],
             "product_name": row[1],
             "selling_price": float(row[2]),
-            "current_stock": row[3]
+            "current_stock": row[3],
+            "supplier_code": row[4],
+            "product_group_code": row[5]
         })
 
     return products

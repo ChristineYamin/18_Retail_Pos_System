@@ -297,6 +297,35 @@ header p {
 }
 
 /* ========================================
+   PRODUCT CATEGORY TABS
+======================================== */
+
+.category-tabs {
+    display: flex;
+    gap: 8px;
+    margin: 15px 0 20px;
+    flex-wrap: wrap;
+}
+
+.category-button {
+    padding: 9px 16px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    background: white;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.category-button:hover {
+    background: #f5f5f5;
+}
+
+.category-button.active {
+    background: #222;
+    color: white;
+    border-color: #222;
+}
+/* ========================================
    RECEIPT BUTTONS
 ======================================== */
 
