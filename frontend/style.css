@@ -617,6 +617,54 @@ header p {
 }
 
 /* ========================================
+   STOCK FILTERS
+======================================== */
+
+.stock-filters {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.filter-section {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.filter-label {
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.filter-buttons {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.supplier-filter,
+.group-filter {
+    padding: 8px 14px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    background: white;
+    cursor: pointer;
+}
+
+.supplier-filter:hover,
+.group-filter:hover {
+    background: #f5f5f5;
+}
+
+.supplier-filter.active,
+.group-filter.active {
+    background: #222;
+    color: white;
+    border-color: #222;
+}
+/* ========================================
    Edit Price Modal
 ======================================== */
 

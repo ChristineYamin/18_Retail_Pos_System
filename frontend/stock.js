@@ -3,6 +3,9 @@ let selectedProduct = null;
 let stockAction = "restock";
 let selectedPriceProduct = null;
 
+let selectedSupplier = "ALL";
+let selectedStockGroup = "ALL";
+
 // ========================================
 // LOAD PRODUCTS
 // ========================================
@@ -457,18 +460,147 @@ document
                 .trim()
                 .toLowerCase();
 
-
         const filtered =
-            stockProducts.filter(product =>
-                product.product_name
-                    .toLowerCase()
-                    .includes(search)
-            );
+    stockProducts.filter(product => {
 
+        const matchesName =
+            product.product_name
+                .toLowerCase()
+                .includes(search);
+
+        const matchesCode =
+            product.product_id
+                .toLowerCase()
+                .includes(search);
+
+        return matchesName || matchesCode;
+    });
 
         displayStockProducts(filtered);
     });
 
+// ========================================
+// FILTER PRODUCTS
+// ========================================
+
+function filterStockProducts() {
+
+    const search =
+        document
+            .getElementById("stockSearch")
+            .value
+            .trim()
+            .toLowerCase();
+
+
+    const filtered =
+        stockProducts.filter(product => {
+
+            const matchesName =
+                product.product_name
+                    .toLowerCase()
+                    .includes(search);
+
+
+            const matchesCode =
+                product.product_id
+                    .toLowerCase()
+                    .includes(search);
+
+
+            const matchesSearch =
+                matchesName || matchesCode;
+
+
+            const matchesSupplier =
+                selectedSupplier === "ALL" ||
+                product.supplier_code === selectedSupplier;
+
+
+            const matchesGroup =
+                selectedStockGroup === "ALL" ||
+                product.product_group_code === selectedStockGroup;
+
+
+            return (
+                matchesSearch &&
+                matchesSupplier &&
+                matchesGroup
+            );
+        });
+
+
+    displayStockProducts(filtered);
+}
+
+document
+    .getElementById("stockSearch")
+    .addEventListener(
+        "input",
+        filterStockProducts
+    );
+// ========================================
+// Add Supplier button Logic
+// ========================================
+
+document
+    .querySelectorAll(".supplier-filter")
+    .forEach(button => {
+
+        button.addEventListener(
+            "click",
+            function () {
+
+                selectedSupplier =
+                    this.dataset.supplier;
+
+
+                document
+                    .querySelectorAll(".supplier-filter")
+                    .forEach(btn =>
+                        btn.classList.remove("active")
+                    );
+
+
+                this.classList.add("active");
+
+
+                filterStockProducts();
+            }
+        );
+
+    });
+
+// ========================================
+// Add Product Group Button Logic
+// ========================================
+document
+    .querySelectorAll(".group-filter")
+    .forEach(button => {
+
+        button.addEventListener(
+            "click",
+            function () {
+
+                selectedStockGroup =
+                    this.dataset.group;
+
+
+                document
+                    .querySelectorAll(".group-filter")
+                    .forEach(btn =>
+                        btn.classList.remove("active")
+                    );
+
+
+                this.classList.add("active");
+
+
+                filterStockProducts();
+            }
+        );
+
+    });
 
 
 // ========================================
