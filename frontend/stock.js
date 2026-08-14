@@ -27,7 +27,7 @@ async function loadStockProducts() {
 
         document.getElementById("stockTableBody").innerHTML = `
             <tr>
-                <td colspan="4">
+                <td colspan="7">
                     Unable to load products.
                 </td>
             </tr>
@@ -53,42 +53,67 @@ function displayStockProducts(products) {
         const row =
             document.createElement("tr");
 
+        let supplierName = "-";
+let groupName = "-";
+
+if (product.supplier_code === "YM") {
+    supplierName = "ရတနာမွန်";
+} else if (product.supplier_code === "LN") {
+    supplierName = "လောကနတ်";
+}
+
+if (product.product_group_code === "RH") {
+    groupName = "ရဟန်းဒွိစုံ";
+} else if (product.product_group_code === "SH") {
+    groupName = "ရှင်ဆောင်ဒွိစုံ";
+} else if (product.product_group_code === "DK") {
+    groupName = "ဒုကုဋ်";
+}
+
 
         row.innerHTML = `
-            <td>
-                <strong>
-                    ${product.product_name}
-                </strong>
-            </td>
+    <td>
+        <strong>${product.product_id}</strong>
+    </td>
 
-            <td>
-                ${product.selling_price.toLocaleString()} MMK
-            </td>
+    <td>
+        ${product.product_name}
+    </td>
 
-            <td>
-                ${product.current_stock}
-            </td>
+    <td>
+        ${supplierName}
+    </td>
 
-            <td>
-               <div class="stock-actions">
-                  <button
-                       class="restock-button"
-                    >
-                       Restock
-                </button>
-                <button
-                    class="set-stock-button"
-                >
-                    Set Stock
-                </button>
-                <button
-                    class="edit-price-button" >
-                    Edit Price
-                </button>
-        
-                </div>
-            </td>`
+    <td>
+        ${groupName}
+    </td>
 
+    <td>
+        ${product.selling_price.toLocaleString()} MMK
+    </td>
+
+    <td>
+        ${product.current_stock}
+    </td>
+
+    <td>
+        <div class="stock-actions">
+
+            <button class="restock-button">
+                Restock
+            </button>
+
+            <button class="set-stock-button">
+                Set Stock
+            </button>
+
+            <button class="edit-price-button">
+                Edit Price
+            </button>
+
+        </div>
+    </td>
+`;
            
 
 
