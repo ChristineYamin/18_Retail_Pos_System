@@ -64,35 +64,71 @@ async function loadProducts() {
 // ========================================
 
 function displayProducts(productList) {
-    const container = document.getElementById("productList");
+
+    const container =
+        document.getElementById("productList");
 
     container.innerHTML = "";
 
-    productList.forEach(product => {
-        const card = document.createElement("div");
 
-        card.className = "product-card";
+    productList.forEach(product => {
+
+        const card =
+            document.createElement("div");
+
+        const isOutOfStock =
+            product.current_stock <= 0;
+
+
+        card.className =
+            isOutOfStock
+                ? "product-card out-of-stock"
+                : "product-card";
+
 
         card.innerHTML = `
-            <h3>${product.product_name}</h3>
+            <div class="product-code">
+                ${product.product_id}
+            </div>
+
+            <h3>
+                ${product.product_name}
+            </h3>
 
             <p>
                 ${product.selling_price.toLocaleString()} MMK
             </p>
 
-            <p class="stock">
-                Stock: ${product.current_stock}
-            </p>
+            ${
+                isOutOfStock
+                    ? `
+                        <p class="out-of-stock-label">
+                            OUT OF STOCK
+                        </p>
+                      `
+                    : `
+                        <p class="stock">
+                            Stock: ${product.current_stock}
+                        </p>
+                      `
+            }
         `;
 
-        card.addEventListener(
-            "click",
-            () => addToCart(product)
-        );
+
+        if (!isOutOfStock) {
+
+            card.addEventListener(
+                "click",
+                () => addToCart(product)
+            );
+
+        }
+
 
         container.appendChild(card);
     });
 }
+ 
 
 // ========================================
 // Filter Products

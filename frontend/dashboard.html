@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Daily Sales Summary</title>
+
+    <link rel="stylesheet" href="/pos/style.css">
+</head>
+
+<body>
+
+    <header class="history-header">
+
+        <div>
+            <h1>Daily Sales Summary</h1>
+            <p id="dashboardDate">Today</p>
+        </div>
+
+        <a href="/pos/" class="back-button">
+            ← New Sale
+        </a>
+
+    </header>
+
+
+    <main class="dashboard-container">
+
+        <!-- MAIN TOTAL -->
+
+        <section class="dashboard-main-card">
+
+            <p>Today's Sales</p>
+
+            <h2 id="totalSales">
+                0 MMK
+            </h2>
+
+        </section>
+
+
+        <!-- SUMMARY CARDS -->
+
+        <section class="dashboard-grid">
+
+            <div class="dashboard-card">
+
+                <span>Transactions</span>
+
+                <strong id="transactionCount">
+                    0
+                </strong>
+
+            </div>
+
+
+            <div class="dashboard-card">
+
+                <span>Items Sold</span>
+
+                <strong id="itemsSold">
+                    0
+                </strong>
+
+            </div>
+
+        </section>
+
+
+        <!-- PAYMENT SUMMARY -->
+
+        <section class="payment-summary">
+
+            <h2>Payment Summary</h2>
+
+
+            <div class="payment-summary-row">
+
+                <span>Cash</span>
+
+                <strong id="cashSales">
+                    0 MMK
+                </strong>
+
+            </div>
+
+
+            <div class="payment-summary-row">
+
+                <span>KBZPay</span>
+
+                <strong id="kbzpaySales">
+                    0 MMK
+                </strong>
+
+            </div>
+
+
+            <div class="payment-summary-row">
+
+                <span>WavePay</span>
+
+                <strong id="wavepaySales">
+                    0 MMK
+                </strong>
+
+            </div>
+
+        </section>
+
+        <!-- TOP SELLING PRODUCTS -->
+        <section class="dashboard-section">
+            <div class="dashboard-section-header">
+                <h2>Top Selling Products</h2>
+            </div>
+            <div id="topProducts">
+                <p>No sales yet today.</p>
+            </div>
+        </section>
+
+        <!-- RECENT TRANSACTIONS -->
+        <section class="dashboard-section">
+            <div class="dashboard-section-header">
+                <h2>Recent Transactions</h2>
+
+                <a
+                    href="/pos/history.html"
+                    class="dashboard-link"
+                >
+                    View All
+                </a>
+            </div>
+            
+            <div class="dashboard-table-wrapper">
+                <table class="dashboard-table">
+                    <thead>
+                        <tr>
+                            <th>Invoice</th>
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th>Payment</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="recentTransactionsBody">
+
+                        <tr>
+                            <td colspan="5">
+                                No sales yet today.
+                            </td>
+                        </tr>
+                    </tbody>
+
+                </table>
+            </div>
+        </section>
+
+    </main>
+
+
+    <script src="/pos/dashboard.js"></script>
+
+</body>
+
+</html>

@@ -471,6 +471,171 @@ def create_sale(sale: SaleCreate):
     finally:
         conn.close()
 
+@app.get("/reports/today")
+def get_today_summary():
+
+    conn = get_connection()
+
+    try:
+        with conn.cursor() as cursor:
+
+            # ========================================
+            # SALES SUMMARY
+            # ========================================
+
+            cursor.execute("""
+                SELECT
+                    CURRENT_DATE,
+                    COUNT(*),
+                    COALESCE(SUM(grand_total), 0),
+
+                    COALESCE(
+                        SUM(grand_total)
+                        FILTER (
+                            WHERE payment_method = 'Cash'
+                        ),
+                        0
+                    ),
+
+                    COALESCE(
+                        SUM(grand_total)
+                        FILTER (
+                            WHERE payment_method = 'KBZPay'
+                        ),
+                        0
+                    ),
+
+                    COALESCE(
+                        SUM(grand_total)
+                        FILTER (
+                            WHERE payment_method = 'WavePay'
+                        ),
+                        0
+                    )
+
+                FROM sales
+
+                WHERE sale_datetime::date = CURRENT_DATE;
+            """)
+
+            summary = cursor.fetchone()
+
+
+            # ========================================
+            # ITEMS SOLD
+            # ========================================
+
+            cursor.execute("""
+                SELECT
+                    COALESCE(SUM(si.quantity), 0)
+
+                FROM sale_items si
+
+                JOIN sales s
+                    ON si.sale_id = s.sale_id
+
+                WHERE s.sale_datetime::date = CURRENT_DATE;
+            """)
+
+            items_sold = cursor.fetchone()[0]
+
+            # ========================================
+            # TOP SELLING PRODUCTS
+            # ========================================
+
+            cursor.execute("""
+                SELECT
+                    p.product_id,
+                    p.product_name,
+                    SUM(si.quantity) AS quantity_sold,
+                    SUM(si.line_total) AS sales_amount
+
+                FROM sale_items si
+
+                JOIN sales s
+                    ON si.sale_id = s.sale_id
+
+                JOIN products p
+                    ON si.product_id = p.product_id
+
+                WHERE s.sale_datetime::date = CURRENT_DATE
+
+                GROUP BY
+                    p.product_id,
+                    p.product_name
+
+                ORDER BY
+                    quantity_sold DESC,
+                    sales_amount DESC
+
+                LIMIT 5;
+            """)
+
+            top_product_rows = cursor.fetchall()
+
+            top_products = []
+
+            for row in top_product_rows:
+
+                top_products.append({
+                    "product_id": row[0],
+                    "product_name": row[1],
+                    "quantity_sold": int(row[2]),
+                    "sales_amount": float(row[3])
+              })
+
+
+            # ========================================
+            # RECENT TRANSACTIONS
+            # ========================================
+
+            cursor.execute("""
+                SELECT
+                    sale_id,
+                    invoice_no,
+                    sale_datetime,
+                    grand_total,
+                    payment_method
+
+                FROM sales
+
+                WHERE sale_datetime::date = CURRENT_DATE
+
+                ORDER BY sale_datetime DESC
+
+                LIMIT 5;
+            """)
+
+            recent_rows = cursor.fetchall()
+
+            recent_transactions = []
+
+            for row in recent_rows:
+
+                recent_transactions.append({
+                    "sale_id": row[0],
+                    "invoice_no": row[1],
+                    "sale_datetime": row[2],
+                    "grand_total": float(row[3]),
+                    "payment_method": row[4]
+              })
+
+
+            return {
+                "date": summary[0],
+                "transactions": summary[1],
+                "total_sales": float(summary[2]),
+                "cash_sales": float(summary[3]),
+                "kbzpay_sales": float(summary[4]),
+                "wavepay_sales": float(summary[5]),
+                "items_sold": int(items_sold),
+                "top_products": top_products,
+                "recent_transactions": recent_transactions
+            }
+
+    finally:
+        conn.close()
+
 app.mount(
     "/pos",
     StaticFiles(directory="frontend", html=True),
