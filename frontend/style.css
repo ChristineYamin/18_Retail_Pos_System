@@ -901,6 +901,72 @@ header p {
     background: #f7f7f7;
 }
 
+/* ========================================
+   REPORT DATE FILTER
+======================================== */
+
+.report-filter {
+    display: flex;
+    align-items: flex-end;
+    gap: 12px;
+
+    background: white;
+
+    padding: 18px;
+
+    margin-bottom: 20px;
+
+    border-radius: 12px;
+}
+
+.report-date-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.report-date-field label {
+    font-size: 13px;
+    font-weight: bold;
+    color: #555;
+}
+
+.report-date-field input {
+    padding: 10px 12px;
+
+    border: 1px solid #ddd;
+    border-radius: 7px;
+
+    font-size: 15px;
+}
+
+.report-button {
+    padding: 11px 18px;
+
+    border: none;
+    border-radius: 7px;
+
+    cursor: pointer;
+
+    font-weight: bold;
+}
+
+.report-button.secondary {
+    background: #eeeeee;
+}
+
+@media (max-width: 600px) {
+
+    .report-filter {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .report-button {
+        width: 100%;
+    }
+}
+
 
 /* ========================================
    THERMAL RECEIPT PRINTING

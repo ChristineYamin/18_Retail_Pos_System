@@ -27,6 +27,44 @@
 
 
     <main class="dashboard-container">
+        <!-- DATE FILTER-->
+         <section class="report-filter">
+            <div class="report-date-field">
+                <label for="reportDate">Select Date:</label>
+                <input
+                    type="date"
+                    id="reportDate"
+                >
+            </div>
+            <button
+                id="viewReportButton"
+                class="report-button"
+            >
+                View Report
+            </button>
+
+            <button
+                id="todayReportButton"
+                class="report-button secondary"   
+            >
+                Today
+            </button>
+            <button
+                id="weekReportButton"
+                class="report-button secondary"
+            >
+                This Week
+            </button>
+
+            <button
+                id="monthReportButton"
+                class="report-button secondary"
+            >
+                This Month
+            </button>
+
+
+         </section>
 
         <!-- MAIN TOTAL -->
 
@@ -161,7 +199,7 @@
     </main>
 
 
-    <script src="/pos/dashboard.js"></script>
+    <script src="/pos/dashboard.js?v=4"></script>
 
 </body>
 
