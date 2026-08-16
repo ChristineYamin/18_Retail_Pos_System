@@ -70,7 +70,6 @@ function displayProducts(productList) {
 
     container.innerHTML = "";
 
-
     productList.forEach(product => {
 
         const card =
@@ -79,14 +78,13 @@ function displayProducts(productList) {
         const isOutOfStock =
             product.current_stock <= 0;
 
-
         card.className =
             isOutOfStock
                 ? "product-card out-of-stock"
                 : "product-card";
 
-
         card.innerHTML = `
+
             <div class="product-code">
                 ${product.product_id}
             </div>
@@ -101,19 +99,20 @@ function displayProducts(productList) {
 
             ${
                 isOutOfStock
+
                     ? `
                         <p class="out-of-stock-label">
                             OUT OF STOCK
                         </p>
-                      `
+                    `
+
                     : `
                         <p class="stock">
                             Stock: ${product.current_stock}
                         </p>
-                      `
+                    `
             }
         `;
-
 
         if (!isOutOfStock) {
 
@@ -121,15 +120,11 @@ function displayProducts(productList) {
                 "click",
                 () => addToCart(product)
             );
-
         }
-
 
         container.appendChild(card);
     });
 }
- 
-
 // ========================================
 // Filter Products
 // ========================================

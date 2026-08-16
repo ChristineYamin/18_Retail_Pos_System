@@ -382,16 +382,9 @@ def create_sale(sale: SaleCreate):
 
                 change_amount = sale.amount_paid - grand_total
 
-                # 4. Create invoice number
-                cursor.execute(
-                    "SELECT COALESCE(MAX(sale_id), 0) + 1 FROM sales"
-                )
+            
 
-                next_sale_id = cursor.fetchone()[0]
-
-                invoice_no = f"INV{next_sale_id:06d}"
-
-                # 5. Save sale
+                # 4. Save sale
                 cursor.execute(
                     """
                     INSERT INTO sales (
@@ -403,23 +396,26 @@ def create_sale(sale: SaleCreate):
                         amount_paid,
                         change_amount
                     )
-                    VALUES (%s, %s, %s, %s, %s, %s, %s)
-                    RETURNING sale_id, sale_datetime
-                    """,
-                    (
+                    VALUES (
+                         'INV' || LPAD(
+                            nextval('invoice_no_seq')::text,
+                            6,
+                            '0'     
+                    ),
+                        %s, %s, %s, %s, %s, %s)
+                    RETURNING
+                        sale_id,
                         invoice_no,
+                        sale_datetime
+                    """, (
                         subtotal,
                         sale.discount,
                         grand_total,
                         sale.payment_method,
                         sale.amount_paid,
-                        change_amount
-                    )
-                )
-
-                sale_row = cursor.fetchone()
-                sale_id = sale_row[0]
-                sale_datetime = sale_row[1]
+                        change_amount   
+                    ))
+                sale_id, invoice_no, sale_datetime = cursor.fetchone()
 
 
                 # 6. Save each item + reduce stock

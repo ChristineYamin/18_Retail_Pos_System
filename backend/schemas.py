@@ -1,4 +1,6 @@
 from pydantic import BaseModel, Field
+from typing import Literal
+
 
 
 class SaleItem(BaseModel):
@@ -9,7 +11,7 @@ class SaleItem(BaseModel):
 class SaleCreate(BaseModel):
     items: list[SaleItem] = Field(min_length=1)
     discount: float = Field(default=0, ge=0)
-    payment_method: str
+    payment_method: Literal["Cash", "KBZPay", "WavePay"]
     amount_paid: float = Field(ge=0)
 
 class StockUpdate(BaseModel):
