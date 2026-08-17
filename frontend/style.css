@@ -972,21 +972,21 @@ header p {
 ======================================== */
 
 :root {
-    --shop-yellow: #D9A62E;
-    --shop-light-yellow: #F4D77A;
+    --shop-yellow: #D6A12E;
+    --shop-light-yellow: #F4D98B;
 
-    --shop-brown: #4A2C1F;
-    --shop-dark-brown: #332018;
+    --shop-brown: #5A3A24;
+    --shop-dark-brown: #3D281A;
 
-    --shop-red: #8A2F24;
-    --shop-dark-red: #682219;
+    --shop-red: #8A3A2C;
+    --shop-dark-red: #6D2F24;
 
-    --shop-cream: #FFF8E8;
-    --shop-soft-cream: #FFFDF7;
+    --shop-cream: #FFF9EC;
+    --shop-soft-cream: #FFFCF5;
 
-    --shop-border: #E7D8B4;
-    --shop-text: #3B2A22;
-    --shop-muted: #7A6A60;
+    --shop-border: #E6D6AE;
+    --shop-text: #3E3026;
+    --shop-muted: #807064;
 }
 
 
@@ -1030,12 +1030,13 @@ body {
     background:
         linear-gradient(
             135deg,
-            var(--shop-brown),
-            var(--shop-red)
+            #FFF4CE,
+            #E8C766
         );
 
+
     border-bottom:
-        5px solid var(--shop-yellow);
+        4px solid var(--shop-brown);
 
     box-shadow:
         0 4px 16px rgba(74, 44, 31, 0.15);
@@ -1087,29 +1088,11 @@ body {
 
 
 .shop-brand h1 {
-    margin: 0;
-
-    color: #FFFFFF;
-
-    font-size: 27px;
-    font-weight: 800;
-
-    line-height: 1.35;
-
-    letter-spacing: 0.2px;
+    color: var(--shop-dark-brown);
 }
 
-
 .shop-brand p {
-    margin: 4px 0 0;
-
-    color: var(--shop-light-yellow);
-
-    font-size: 12px;
-
-    letter-spacing: 0.8px;
-
-    text-transform: uppercase;
+    color: var(--shop-brown);
 }
 
 
@@ -1117,62 +1100,16 @@ body {
    HEADER NAVIGATION
 ======================================== */
 
-.shop-navigation {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-
-    flex-wrap: wrap;
-}
-
-
 .shop-nav-link {
-    padding: 10px 16px;
-
-    border:
-        1px solid rgba(
-            255,
-            255,
-            255,
-            0.22
-        );
-
-    border-radius: 8px;
-
-    color: #FFFFFF;
-
-    text-decoration: none;
-
-    font-size: 14px;
-    font-weight: 600;
-
-    background:
-        rgba(
-            255,
-            255,
-            255,
-            0.08
-        );
-
-    transition:
-        background 0.2s ease,
-        transform 0.2s ease,
-        border-color 0.2s ease;
+    color: var(--shop-dark-brown);
+    background: rgba(255, 255, 255, 0.4);
+    border: 1px solid rgba(90, 58, 36, 0.25);
 }
-
 
 .shop-nav-link:hover {
-    background:
-        var(--shop-yellow);
-
-    color:
-        var(--shop-dark-brown);
-
-    border-color:
-        var(--shop-yellow);
-
-    transform:
-        translateY(-1px);
+    background: var(--shop-brown);
+    color: white;
+    border-color: var(--shop-brown);
 }
 
 
@@ -1259,13 +1196,9 @@ body {
 
 
 .category-button.active {
-    background:
-        var(--shop-red);
-
-    border-color:
-        var(--shop-red);
-
-    color: #FFFFFF;
+    background: var(--shop-brown);
+    border-color: var(--shop-brown);
+    color: white;
 }
 
 
@@ -1298,12 +1231,8 @@ select:focus {
 ======================================== */
 
 #payButton {
-    background:
-        var(--shop-red);
-
-    color: #FFFFFF;
-
-    border: none;
+    background: var(--shop-red);
+    color: white;
 }
 
 
@@ -1342,7 +1271,6 @@ select:focus {
 /* ========================================
    TABLET RESPONSIVE HEADER
 ======================================== */
-
 @media (max-width: 800px) {
 
     .shop-header {
@@ -1352,33 +1280,162 @@ select:focus {
         padding: 14px 18px;
     }
 
-
     .shop-navigation {
         width: 100%;
+        margin-left: 0;
+        justify-content: flex-start;
     }
-
 
     .shop-nav-link {
         flex: 1;
-
         text-align: center;
+        min-width: 120px;
     }
-
 
     .shop-brand h1 {
         font-size: 23px;
     }
 
-
     .shop-brand-mark {
         width: 46px;
         height: 46px;
-
         font-size: 20px;
     }
 }
 
+@media (max-width: 800px) {
 
+    .shop-navigation {
+        position: static !important;
+
+        width: 100% !important;
+
+        transform: none !important;
+
+        margin-top: 12px !important;
+
+        justify-content: flex-start !important;
+    }
+
+}
+
+
+/* ========================================
+   HEADER NAVIGATION
+======================================== */
+
+.shop-navigation {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    margin-left: auto;   /* move nav to the right */
+    justify-content: flex-end;
+
+    flex-wrap: wrap;
+}
+
+.shop-nav-link {
+    padding: 10px 18px;
+
+    border-radius: 10px;
+    border: 1px solid var(--shop-border);
+
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 700;
+
+    color: var(--shop-brown);
+
+    background: #fffdf7;
+
+    box-shadow: 0 2px 8px rgba(74, 44, 31, 0.08);
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+/* Different soft colors for each nav button */
+.shop-nav-link:nth-child(1) {
+    background: #fff4cf;   /* Dashboard */
+    border-color: #e3c468;
+}
+
+.shop-nav-link:nth-child(2) {
+    background: #f7eedf;   /* Stock */
+    border-color: #cda97b;
+}
+
+.shop-nav-link:nth-child(3) {
+    background: #f8e5dd;   /* Sales History */
+    border-color: #c98f7f;
+}
+
+.shop-nav-link:hover {
+    background: var(--shop-brown);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(74, 44, 31, 0.14);
+}
+
+/* ========================================
+   FINAL HEADER NAVIGATION
+======================================== */
+
+.shop-header {
+    position: relative !important;
+}
+
+
+/* Move navigation to the right */
+.shop-navigation {
+    position: absolute !important;
+
+    right: 35px !important;
+    top: 50% !important;
+
+    transform: translateY(-50%) !important;
+
+    display: flex !important;
+    align-items: center !important;
+
+    gap: 12px !important;
+}
+
+
+/* Brown navigation buttons */
+.shop-header .shop-navigation a {
+    background: #5A3A24 !important;
+    color: #FFF9EC !important;
+
+    border: 1px solid #5A3A24 !important;
+
+    border-radius: 10px !important;
+
+    padding: 11px 20px !important;
+
+    font-weight: 700 !important;
+    text-decoration: none !important;
+
+    box-shadow:
+        0 2px 5px rgba(74, 44, 31, 0.12) !important;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease !important;
+}
+
+
+/* Hover */
+.shop-header .shop-navigation a:hover {
+    background: #3D281A !important;
+    color: #F4D77A !important;
+
+    transform: translateY(-2px) !important;
+}
 
 /* ========================================
    THERMAL RECEIPT PRINTING
@@ -1448,3 +1505,4 @@ select:focus {
     }
 
 }
+
