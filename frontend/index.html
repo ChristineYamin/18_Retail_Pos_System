@@ -7,40 +7,49 @@
 
     <title>Retail POS</title>
 
-    <link rel="stylesheet" href="/pos/style.css?v=6">
+    <link rel="stylesheet" href="/pos/style.css?v=11">
 </head>
 
 <body>
 
-
 <header class="shop-header">
 
     <div class="shop-brand">
+
         <div class="shop-name-row">
-            <span class="shop-brand-mark">ဝါ</span>
-            <div>
-                <h1>ဝါဝါသင်္ကန်းတိုက်</h1>
-            </div>
-        </div>
 
-        <div class="header-actions">
-            <a href="/pos/dashboard.html" class="back-button">
-                Dashboard
-            </a>
-            
-            <a href="/pos/stock.html" class="back-button">
-                Stock
-            </a>
+            <span class="shop-brand-mark">
+                ဝါ
+            </span>
 
-            <a href="/pos/history.html" class="back-button">
-                Sales History
-            </a>
+            <h1>
+                ဝါဝါသင်္ကန်းတိုက်
+            </h1>
 
         </div>
+
+    </div>
+
+
+    <div class="header-actions">
+
+        <a href="/pos/dashboard.html" class="back-button">
+            Dashboard
+        </a>
+
+        <a href="/pos/stock.html" class="back-button">
+            Stock
+        </a>
+
+        <a href="/pos/history.html" class="back-button">
+            Sales History
+        </a>
+
+    </div>
 
 </header>
 
-    
+
 
 
     <main class="pos-container">
@@ -195,69 +204,137 @@
 
     <div class="receipt">
 
+        <!-- SHOP HEADER -->
         <div class="receipt-header">
-            <h2>SHOP NAME</h2>
-            <p>Sales Receipt</p>
+
+            <h2>
+                ဝါဝါသင်္ကန်းတိုက်
+            </h2>
+
+            <p class="receipt-subtitle">
+                အရောင်းပြေစာ
+            </p>
+
         </div>
 
-        <div class="receipt-info">
+
+        <!-- SHOP CONTACT -->
+        <div class="receipt-shop-info">
+
             <p>
-                Invoice:
+                ဖုန်း - 09400616400 / 09765337302
+            </p>
+
+            <p>
+                လိပ်စာ - အမှတ် ၇၇၀၊ ကုန်သည်လမ်း၊<br>
+                စျေးအနောက်ဘက်၊ မြို့မမြောက်ရပ်ကွက်၊<br>
+                ရေနံချောင်းမြို့
+            </p>
+
+        </div>
+
+
+        <div class="receipt-divider"></div>
+
+
+        <!-- SALE INFORMATION -->
+        <div class="receipt-info">
+
+            <p>
+                <span>Invoice</span>
                 <span id="receiptInvoice"></span>
             </p>
 
             <p>
-                Date:
+                <span>Date</span>
                 <span id="receiptDate"></span>
             </p>
 
             <p>
-                Time:
+                <span>Time</span>
                 <span id="receiptTime"></span>
             </p>
+
         </div>
 
-        <hr>
 
+        <div class="receipt-divider"></div>
+
+
+        <!-- PRODUCTS -->
         <div id="receiptItems"></div>
 
-        <hr>
 
+        <div class="receipt-divider"></div>
+
+
+        <!-- TOTALS -->
         <div class="receipt-total-row">
             <span>Subtotal</span>
             <span id="receiptSubtotal"></span>
         </div>
+
 
         <div class="receipt-total-row">
             <span>Discount</span>
             <span id="receiptDiscount"></span>
         </div>
 
+
         <div class="receipt-total-row receipt-grand-total">
             <span>TOTAL</span>
             <span id="receiptGrandTotal"></span>
         </div>
+
 
         <div class="receipt-total-row">
             <span>Paid</span>
             <span id="receiptPaid"></span>
         </div>
 
+
         <div class="receipt-total-row">
             <span>Change</span>
             <span id="receiptChange"></span>
         </div>
+
 
         <div class="receipt-total-row">
             <span>Payment</span>
             <span id="receiptPayment"></span>
         </div>
 
-        <p class="receipt-thanks">
-            Thank you
-        </p>
 
+        <div class="receipt-divider"></div>
+
+
+        <!-- THANK YOU MESSAGE -->
+        <div class="receipt-thanks">
+
+            <p>
+                ဝယ်ယူအားပေးမှုအတွက်
+                အထူးကျေးဇူးတင်ရှိပါသည်။
+            </p>
+
+            <p>
+                ကုသိုလ်ရေးအဖြာဖြာ
+                ပြည့်စုံကြပါစေ။
+            </p>
+
+            <p>
+                ဘေးဥပဒ်အပေါင်းမှ
+                ကင်းဝေးကြပါစေရှင်။
+            </p>
+
+        </div>
+
+
+        <div class="receipt-divider"></div>
+
+
+        <!-- BUTTONS -->
         <div class="receipt-buttons">
+
             <button id="printReceiptButton">
                 PRINT
             </button>
@@ -265,6 +342,7 @@
             <button id="closeReceiptButton">
                 CLOSE
             </button>
+
         </div>
 
     </div>
@@ -272,7 +350,7 @@
 </div>
 
 
-    <script src="/pos/app.js"></script>
+    <script src="/pos/app.js?v=2"></script>
 
 </body>
 

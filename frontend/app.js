@@ -85,33 +85,57 @@ function displayProducts(productList) {
 
         card.innerHTML = `
 
-            <div class="product-code">
-                ${product.product_id}
+            <div class="product-image-area">
+
+    <img
+        src="/pos/images/products/${product.product_id}.jpg"
+        alt="${product.product_name}"
+        class="product-image"
+
+        onerror="
+            this.style.display='none';
+            this.nextElementSibling.style.display='flex';
+        "
+    >
+
+    <div
+        class="product-image-placeholder"
+        style="display: none;"
+    >
+        <span>ဝါ</span>
+    </div>
+
+</div>
+
+            <div class="product-card-content">
+
+                <div class="product-code">
+                    ${product.product_id}
+                </div>
+
+                <h3>
+                    ${product.product_name}
+                </h3>
+
+                <div class="product-price">
+                    ${product.selling_price.toLocaleString()} MMK
+                </div>
+
+                ${
+                    isOutOfStock
+                        ? `
+                            <div class="out-of-stock-label">
+                                OUT OF STOCK
+                            </div>
+                        `
+                        : `
+                            <div class="stock">
+                                Stock: ${product.current_stock}
+                            </div>
+                        `
+                }
+
             </div>
-
-            <h3>
-                ${product.product_name}
-            </h3>
-
-            <p>
-                ${product.selling_price.toLocaleString()} MMK
-            </p>
-
-            ${
-                isOutOfStock
-
-                    ? `
-                        <p class="out-of-stock-label">
-                            OUT OF STOCK
-                        </p>
-                    `
-
-                    : `
-                        <p class="stock">
-                            Stock: ${product.current_stock}
-                        </p>
-                    `
-            }
         `;
 
         if (!isOutOfStock) {
@@ -125,6 +149,7 @@ function displayProducts(productList) {
         container.appendChild(card);
     });
 }
+    
 // ========================================
 // Filter Products
 // ========================================
