@@ -7,7 +7,7 @@
 
     <title>Stock Management</title>
 
-    <link rel="stylesheet" href="/pos/style.css?v=21">
+    <link rel="stylesheet" href="/pos/style.css?v=22">
 </head>
 
 <body>
@@ -106,6 +106,37 @@
         </select>
 
     </div>
+
+    <div class="filter-section">
+
+        <label
+            class="filter-label"
+            for="stockStatusFilter"
+        >
+            Stock Status
+        </label>
+
+        <select id="stockStatusFilter">
+
+            <option value="ALL">
+                All Stock
+            </option>
+
+            <option value="RESTOCK">
+                Needs Restock (0 - 5)
+            </option>
+
+            <option value="OUT">
+                Out of Stock
+            </option>
+
+        </select>
+
+    </div>
+
+
+
+
 
 </div>
 
@@ -229,7 +260,7 @@
 </div>
 
 
-    <script src="/pos/stock.js?v=9"></script>
+    <script src="/pos/stock.js?v=11"></script>
 
 </body>
 

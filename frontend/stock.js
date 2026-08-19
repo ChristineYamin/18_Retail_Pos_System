@@ -6,6 +6,7 @@ let selectedPriceProduct = null;
 
 let selectedStockSupplier = "ALL";
 let selectedStockGroup = "ALL";
+let selectedStockStatus = "ALL";
 
 // ========================================
 // LOAD PRODUCTS
@@ -98,6 +99,30 @@ const groupName =
     groupNames[product.product_group_code] || "-";
 
 
+    // ========================================
+// STOCK STATUS
+// ========================================
+
+let stockStatus = "";
+
+if (product.current_stock === 0) {
+
+    stockStatus = `
+        <span class="stock-status out">
+            OUT OF STOCK
+        </span>
+    `;
+
+} else if (product.current_stock <= 5) {
+
+    stockStatus = `
+        <span class="stock-status low">
+            LOW STOCK
+        </span>
+    `;
+}
+
+
 
         row.innerHTML = `
     <td>
@@ -121,7 +146,12 @@ const groupName =
     </td>
 
     <td>
-        ${product.current_stock}
+       <div class="stock-quantity">
+           <strong>
+               ${product.current_stock}
+            </strong>
+            ${stockStatus}
+        </div>
     </td>
 
     <td>
@@ -523,11 +553,26 @@ function applyStockFilters() {
                 product.product_group_code ===
                     selectedStockGroup;
 
+            // Stock status filter
+let matchesStockStatus = true;
+
+if (selectedStockStatus === "RESTOCK") {
+
+    matchesStockStatus =
+        product.current_stock <= 5;
+
+} else if (selectedStockStatus === "OUT") {
+
+    matchesStockStatus =
+        product.current_stock === 0;
+}
+
 
             return (
                 matchesSearch &&
                 matchesSupplier &&
-                matchesGroup
+                matchesGroup &&
+                matchesStockStatus
             );
         });
 
@@ -563,6 +608,17 @@ document
     .addEventListener("change", function () {
 
         selectedStockGroup =
+            this.value;
+
+        applyStockFilters();
+    });
+
+// Stock status dropdown
+document
+    .getElementById("stockStatusFilter")
+    .addEventListener("change", function () {
+
+        selectedStockStatus =
             this.value;
 
         applyStockFilters();

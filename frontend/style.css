@@ -2788,3 +2788,38 @@ select:focus {
         width: 100%;
     }
 }
+
+/* ========================================
+   STOCK STATUS
+======================================== */
+
+.stock-quantity {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+}
+
+.stock-status {
+    display: inline-block;
+
+    padding: 3px 7px;
+
+    border-radius: 6px;
+
+    font-size: 10px;
+    font-weight: 800;
+
+    letter-spacing: 0.3px;
+    white-space: nowrap;
+}
+
+.stock-status.low {
+    background: #FFF1C2;
+    color: #8A6414;
+}
+
+.stock-status.out {
+    background: #F8DFDA;
+    color: var(--shop-red);
+}
