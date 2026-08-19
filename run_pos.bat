@@ -6,6 +6,6 @@ start "Wa Wa POS Server" cmd /k ".venv\Scripts\python.exe -m uvicorn backend.mai
 
 timeout /t 3 /nobreak >nul
 
-start "" "http://127.0.0.1:8000/pos/"
+start "" msedge.exe --app="http://127.0.0.1:8000/pos/"
 
 exit
