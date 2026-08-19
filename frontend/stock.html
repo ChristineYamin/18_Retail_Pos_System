@@ -7,7 +7,7 @@
 
     <title>Stock Management</title>
 
-    <link rel="stylesheet" href="/pos/style.css">
+    <link rel="stylesheet" href="/pos/style.css?v=21">
 </head>
 
 <body>
@@ -34,83 +34,84 @@
             placeholder="Search product..."
         >
 
-        <div class="stock-filters">
+    <div class="stock-filters">
 
     <div class="filter-section">
 
-        <span class="filter-label">
+        <label
+            class="filter-label"
+            for="stockSupplierFilter"
+        >
             Supplier
-        </span>
+        </label>
 
-        <div class="filter-buttons">
+        <select id="stockSupplierFilter">
 
-            <button
-                class="supplier-filter active"
-                data-supplier="ALL"
-            >
-                All
-            </button>
+            <option value="ALL">
+                All Suppliers
+            </option>
 
-            <button
-                class="supplier-filter"
-                data-supplier="YM"
-            >
+            <option value="YM">
                 ရတနာမွန်
-            </button>
+            </option>
 
-            <button
-                class="supplier-filter"
-                data-supplier="LN"
-            >
+            <option value="LN">
                 လောကနတ်
-            </button>
+            </option>
 
-        </div>
+            <option value="UNKNOWN">
+                Not Assigned
+            </option>
+
+        </select>
 
     </div>
 
 
     <div class="filter-section">
 
-        <span class="filter-label">
+        <label
+            class="filter-label"
+            for="stockGroupFilter"
+        >
             Product Group
-        </span>
+        </label>
 
-        <div class="filter-buttons">
+        <select id="stockGroupFilter">
 
-            <button
-                class="group-filter active"
-                data-group="ALL"
-            >
-                All
-            </button>
+            <option value="ALL">All Groups</option>
 
-            <button
-                class="group-filter"
-                data-group="RH"
-            >
-                ရဟန်းဒွိစုံ
-            </button>
+            <option value="RH">ရဟန်းဒွိစုံ</option>
+            <option value="SH">ရှင်ဆောင်ဒွိစုံ</option>
+            <option value="DK">ဒုကုဋ်</option>
 
-            <button
-                class="group-filter"
-                data-group="SH"
-            >
-                ရှင်ဆောင်ဒွိစုံ
-            </button>
+            <option value="UM">ထီး</option>
+            <option value="GU">ထီးဖြူ / ရွှေထီး</option>
+            <option value="FW">ဖိနပ်</option>
+            <option value="FN">ယပ်</option>
+            <option value="BW">ခြုံထည် / ကိုယ်ပတ်</option>
+            <option value="MT">ခြေသုတ်ခုံ / နေရာထိုင်</option>
+            <option value="KR">ကြာသင်္ကန်း</option>
+            <option value="MC">မျက်နှာကြက်</option>
+            <option value="RF">သာသနာ့အလံ</option>
+            <option value="AB">သပိတ် / သပိတ်လွယ်</option>
+            <option value="AK">အန္တကိုက်</option>
+            <option value="SL">သီလရှင်</option>
+            <option value="BG">အိတ်</option>
+            <option value="SW">ဆွယ်တာ / အနွေးထည်</option>
+            <option value="WB">ခါးပန်းကြိုး</option>
+            <option value="KS">ဓားဘူး</option>
+            <option value="MA">ဘုန်းကြီးအသုံးအဆောင်</option>
 
-            <button
-                class="group-filter"
-                data-group="DK"
-            >
-                ဒုကုဋ်
-            </button>
-
-        </div>
+        </select>
 
     </div>
 
 </div>
+
+        
+
+
 
 
         <div class="stock-table-wrapper">
@@ -228,7 +229,7 @@
 </div>
 
 
-    <script src="/pos/stock.js"></script>
+    <script src="/pos/stock.js?v=9"></script>
 
 </body>
 

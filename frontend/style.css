@@ -2643,3 +2643,148 @@ select:focus {
         display: none !important;
     }
 }
+
+/* ========================================
+   CATEGORY FILTER
+======================================== */
+
+.category-filter {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 16px 0 22px;
+}
+
+.category-filter label {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--shop-brown);
+    white-space: nowrap;
+}
+
+.category-filter select {
+    width: 100%;
+    max-width: 320px;
+
+    padding: 11px 42px 11px 14px;
+
+    border: 1px solid var(--shop-border);
+    border-radius: 10px;
+
+    background-color: var(--shop-soft-cream);
+    color: var(--shop-text);
+
+    font-family:
+        "Myanmar Text",
+        "Noto Sans Myanmar",
+        Arial,
+        sans-serif;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    outline: none;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background-color 0.2s ease;
+}
+
+.category-filter select:hover {
+    border-color: var(--shop-yellow);
+}
+
+.category-filter select:focus {
+    border-color: var(--shop-yellow);
+
+    box-shadow:
+        0 0 0 3px rgba(214, 161, 46, 0.15);
+
+    background-color: #ffffff;
+}
+
+/* ========================================
+   STOCK FILTER DROPDOWNS
+======================================== */
+
+.stock-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+    margin: 18px 0 24px;
+}
+
+.filter-section {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    min-width: 220px;
+}
+
+.filter-label {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--shop-brown);
+}
+
+.filter-section select {
+    width: 100%;
+    min-width: 220px;
+
+    padding: 11px 40px 11px 14px;
+
+    border: 1px solid var(--shop-border);
+    border-radius: 10px;
+
+    background-color: var(--shop-soft-cream);
+    color: var(--shop-text);
+
+    font-family:
+        "Myanmar Text",
+        "Noto Sans Myanmar",
+        Arial,
+        sans-serif;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+    outline: none;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background-color 0.2s ease;
+}
+
+.filter-section select:hover {
+    border-color: var(--shop-yellow);
+}
+
+.filter-section select:focus {
+    border-color: var(--shop-yellow);
+
+    box-shadow:
+        0 0 0 3px rgba(214, 161, 46, 0.15);
+
+    background-color: #ffffff;
+}
+
+@media (max-width: 700px) {
+
+    .stock-filters {
+        flex-direction: column;
+    }
+
+    .filter-section {
+        width: 100%;
+    }
+
+    .filter-section select {
+        max-width: none;
+        width: 100%;
+    }
+}

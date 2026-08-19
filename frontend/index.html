@@ -65,36 +65,41 @@
                 placeholder="Search product..."
             >
 
-            <div class="category-tabs">
-                <button
-                    class="category-button active"
-                    data-group="ALL"
-                >
-                ALL
-               </button>
+            <div class="category-filter">
+                <label for="categorySelect">
+                    Category
+                </label>
 
-               <button
-                 class="category-button"
-                data-group="RH"
-                > 
-                ရဟန်းဒွိစုံ
-                </button>
+                <select id="categorySelect">
 
-                <button
-                class="category-button"
-                data-group="SH"
-               >
-               ရှင်ဆောင်ဒွိစုံ
-               </button>
+                    <option value="ALL">All Products</option>
+                    <option value="RH">ရဟန်းဒွိစုံ</option>
+                    <option value="SH">ရှင်ဆောင်ဒွိစုံ</option>
+                    <option value="DK">ဒုကုဋ်</option>
 
-                <button
-                class="category-button"
-                data-group="DK"
-                >
-                 ဒုကုဋ်
-                </button>
+                    <option value="UM">ထီး</option>
+                    <option value="GU">ထီးဖြူ / ရွှေထီး</option>
+                    <option value="FW">ဖိနပ်</option>
+                    <option value="FN">ယပ်</option>
+                    <option value="BW">ခြုံထည် / ကိုယ်ပတ်</option>
+                    <option value="MT">ခြေသုတ်ခုံ / နေရာထိုင်</option>
+                    <option value="KR">ကြာသင်္ကန်း</option>
+                    <option value="MC">မျက်နှာကြက်</option>
+                    <option value="RF">သာသနာ့အလံ</option>
+                    <option value="AB">သပိတ် / သပိတ်လွယ်</option>
+                    <option value="AK">အန္တကိုက်</option>
+                    <option value="SL">သီလရှင်</option>
+                    <option value="BG">အိတ်</option>
+                    <option value="SW">ဆွယ်တာ / အနွေးထည်</option>
+                    <option value="WB">ခါးပန်းကြိုး</option>
+                    <option value="KS">ဓားဘူး</option>
+                    <option value="MA">ဘုန်းကြီးအသုံးအဆောင်</option>
+
+                </select>
 
             </div>
+
+            
 
             <div id="productList" class="product-grid">
                 <!-- Products will come from PostgreSQL -->
@@ -350,7 +355,7 @@
 </div>
 
 
-    <script src="/pos/app.js?v=2"></script>
+    <script src="/pos/app.js?v=3"></script>
 
 </body>
 

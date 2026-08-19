@@ -3,7 +3,8 @@ let selectedProduct = null;
 let stockAction = "restock";
 let selectedPriceProduct = null;
 
-let selectedSupplier = "ALL";
+
+let selectedStockSupplier = "ALL";
 let selectedStockGroup = "ALL";
 
 // ========================================
@@ -56,22 +57,46 @@ function displayStockProducts(products) {
         const row =
             document.createElement("tr");
 
-        let supplierName = "-";
-let groupName = "-";
+    
+        let supplierName = "Not Assigned";
+        if (product.supplier_code === "YM") {
+           supplierName = "ရတနာမွန်";
+        } else if (product.supplier_code === "LN") {
+            supplierName = "လောကနတ်";
+        }
 
-if (product.supplier_code === "YM") {
-    supplierName = "ရတနာမွန်";
-} else if (product.supplier_code === "LN") {
-    supplierName = "လောကနတ်";
-}
 
-if (product.product_group_code === "RH") {
-    groupName = "ရဟန်းဒွိစုံ";
-} else if (product.product_group_code === "SH") {
-    groupName = "ရှင်ဆောင်ဒွိစုံ";
-} else if (product.product_group_code === "DK") {
-    groupName = "ဒုကုဋ်";
-}
+// ========================================
+// PRODUCT GROUP NAME
+// ========================================
+
+const groupNames = {
+    RH: "ရဟန်းဒွိစုံ",
+    SH: "ရှင်ဆောင်ဒွိစုံ",
+    DK: "ဒုကုဋ်",
+
+    UM: "ထီး",
+    GU: "ထီးဖြူ / ရွှေထီး",
+    FW: "ဖိနပ်",
+    FN: "ယပ်",
+    BW: "ခြုံထည် / ကိုယ်ပတ်",
+    MT: "ခြေသုတ်ခုံ / နေရာထိုင်",
+    KR: "ကြာသင်္ကန်း",
+    MC: "မျက်နှာကြက်",
+    RF: "သာသနာ့အလံ",
+    AB: "သပိတ် / သပိတ်လွယ်",
+    AK: "အန္တကိုက်",
+    SL: "သီလရှင်",
+    BG: "အိတ်",
+    SW: "ဆွယ်တာ / အနွေးထည်",
+    WB: "ခါးပန်းကြိုး",
+    KS: "ဓားဘူး",
+    MA: "ဘုန်းကြီးအသုံးအဆောင်"
+};
+
+const groupName =
+    groupNames[product.product_group_code] || "-";
+
 
 
         row.innerHTML = `
@@ -445,39 +470,105 @@ async function updatePrice() {
     }
 }
 
-
-
 // ========================================
-// SEARCH
+// STOCK FILTERS
 // ========================================
 
+function applyStockFilters() {
+
+    const search =
+        document
+            .getElementById("stockSearch")
+            .value
+            .trim()
+            .toLowerCase();
+
+
+    const filtered =
+        stockProducts.filter(product => {
+
+            // Search by name OR product code
+            const matchesSearch =
+                product.product_name
+                    .toLowerCase()
+                    .includes(search) ||
+                product.product_id
+                    .toLowerCase()
+                    .includes(search);
+
+
+            // Supplier filter
+            let matchesSupplier = true;
+
+            if (selectedStockSupplier === "YM") {
+
+                matchesSupplier =
+                    product.supplier_code === "YM";
+
+            } else if (selectedStockSupplier === "LN") {
+
+                matchesSupplier =
+                    product.supplier_code === "LN";
+
+            } else if (selectedStockSupplier === "UNKNOWN") {
+
+                matchesSupplier =
+                    !product.supplier_code;
+            }
+
+
+            // Product group filter
+            const matchesGroup =
+                selectedStockGroup === "ALL" ||
+                product.product_group_code ===
+                    selectedStockGroup;
+
+
+            return (
+                matchesSearch &&
+                matchesSupplier &&
+                matchesGroup
+            );
+        });
+
+
+    displayStockProducts(filtered);
+}
+
+
+// Search box
 document
     .getElementById("stockSearch")
-    .addEventListener("input", function () {
+    .addEventListener(
+        "input",
+        applyStockFilters
+    );
 
-        const search =
-            this.value
-                .trim()
-                .toLowerCase();
 
-        const filtered =
-    stockProducts.filter(product => {
+// Supplier dropdown
+document
+    .getElementById("stockSupplierFilter")
+    .addEventListener("change", function () {
 
-        const matchesName =
-            product.product_name
-                .toLowerCase()
-                .includes(search);
+        selectedStockSupplier =
+            this.value;
 
-        const matchesCode =
-            product.product_id
-                .toLowerCase()
-                .includes(search);
-
-        return matchesName || matchesCode;
+        applyStockFilters();
     });
 
-        displayStockProducts(filtered);
+
+// Product group dropdown
+document
+    .getElementById("stockGroupFilter")
+    .addEventListener("change", function () {
+
+        selectedStockGroup =
+            this.value;
+
+        applyStockFilters();
     });
+
+ 
 
 // ========================================
 // FILTER PRODUCTS

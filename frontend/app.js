@@ -10,28 +10,13 @@ let currentGrandTotal = 0;
 // Add Category Button logic
 // ========================================
 document
-    .querySelectorAll(".category-button")
-    .forEach(button => {
+    .getElementById("categorySelect")
+    .addEventListener("change", function () {
 
-        button.addEventListener("click", function () {
+        selectedProductGroup =
+            this.value;
 
-            selectedProductGroup =
-                this.dataset.group;
-
-
-            document
-                .querySelectorAll(".category-button")
-                .forEach(btn =>
-                    btn.classList.remove("active")
-                );
-
-
-            this.classList.add("active");
-
-
-            filterProducts();
-        });
-
+        filterProducts();
     });
 
 // ========================================
