@@ -7,7 +7,7 @@
 
     <title>Retail POS</title>
 
-    <link rel="stylesheet" href="/pos/style.css?v=11">
+    <link rel="stylesheet" href="/pos/style.css?v=13">
 </head>
 
 <body>
@@ -96,6 +96,24 @@
                     <option value="MA">ဘုန်းကြီးအသုံးအဆောင်</option>
 
                 </select>
+
+            </div>
+
+            <!-- ပရိက္ခရာ ၈-ပါး BUILDER BUTTON -->
+
+            <div class="parikkhara-entry">
+
+                <button
+                    id="openParikkharaButton"
+                    type="button"
+                    class="parikkhara-open-button"
+                >
+                    ပရိက္ခရာ ၈-ပါး
+                </button>
+
+                <p class="parikkhara-entry-note">
+                    စိတ်ကြိုက်ရွေးချယ်ရန်
+                </p>
 
             </div>
 
@@ -202,6 +220,488 @@
         </section>
 
     </main>
+<!-- =====================================================
+     ပရိက္ခရာ ၈-ပါး CUSTOM SET BUILDER
+===================================================== -->
+
+<div
+    id="parikkharaModal"
+    class="parikkhara-modal"
+    style="display: none;"
+>
+
+    <div class="parikkhara-builder">
+
+        <!-- HEADER -->
+        <div class="parikkhara-header">
+
+            <div>
+                <h2>ပရိက္ခရာ ၈-ပါး</h2>
+
+                <p>
+                    စိတ်ကြိုက် ပရိက္ခရာအစုံ ပြင်ဆင်ရန်
+                </p>
+            </div>
+
+            <button
+                id="closeParikkharaButton"
+                type="button"
+                class="parikkhara-close-button"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <!-- ========================================
+             MAIN CHOICES
+        ========================================= -->
+
+        <div class="parikkhara-choice-grid">
+
+
+            <!-- 1 + 2. ရဟန်းဒွိစုံ -->
+
+            <div class="parikkhara-choice-box">
+
+                <div class="parikkhara-choice-heading">
+
+                    <span class="parikkhara-number">
+                        1 + 2
+                    </span>
+
+                    <div>
+                        <strong>
+                            ရဟန်းဒွိစုံ
+                        </strong>
+
+                        <small>
+                            ဧကသီ + သင်းပိုင်
+                        </small>
+                    </div>
+
+                </div>
+
+
+                <select id="parikkharaRahanSelect">
+
+                    <option value="">
+                        ရဟန်းဒွိစုံ ရွေးပါ
+                    </option>
+
+                </select>
+
+
+                <div class="parikkhara-selected-info">
+
+                    <span>
+                        ရွေးချယ်ထားသောပစ္စည်း
+                    </span>
+
+                    <strong id="parikkharaRahanSelected">
+                        မရွေးရသေးပါ
+                    </strong>
+
+                    <small id="parikkharaRahanPrice">
+                        —
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <!-- 3. ဒုကုဋ် -->
+
+            <div class="parikkhara-choice-box">
+
+                <div class="parikkhara-choice-heading">
+
+                    <span class="parikkhara-number">
+                        3
+                    </span>
+
+                    <div>
+                        <strong>
+                            ဒုကုဋ်
+                        </strong>
+
+                        <small>
+                            တစ်မျိုးရွေးချယ်ပါ
+                        </small>
+                    </div>
+
+                </div>
+
+
+                <select id="parikkharaDukoteSelect">
+
+                    <option value="">
+                        ဒုကုဋ် ရွေးပါ
+                    </option>
+
+                </select>
+
+
+                <div class="parikkhara-selected-info">
+
+                    <span>
+                        ရွေးချယ်ထားသောပစ္စည်း
+                    </span>
+
+                    <strong id="parikkharaDukoteSelected">
+                        မရွေးရသေးပါ
+                    </strong>
+
+                    <small id="parikkharaDukotePrice">
+                        —
+                    </small>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ========================================
+             သပိတ်
+        ========================================= -->
+
+        <div class="parikkhara-option-section">
+
+            <div class="parikkhara-choice-heading">
+
+                <span class="parikkhara-number">
+                    5
+                </span>
+
+                <div>
+                    <strong>
+                        သပိတ်
+                    </strong>
+
+                    <small>
+                        တစ်မျိုးရွေးချယ်ပါ
+                    </small>
+                </div>
+
+            </div>
+
+
+            <!-- Keep same ID for JS -->
+            <input
+                type="hidden"
+                id="parikkharaBowlSelect"
+                value=""
+            >
+
+
+            <div class="parikkhara-option-cards">
+
+                <button
+                    type="button"
+                    class="parikkhara-option-card bowl-option"
+                    data-product-id="WW-0079"
+                >
+
+                    <span class="option-check">
+                        ✓
+                    </span>
+
+                    <strong>
+                        သံသပိတ်
+                    </strong>
+
+                    <small>
+                        WW-0079
+                    </small>
+
+                    <b>
+                        17,000 MMK
+                    </b>
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="parikkhara-option-card bowl-option"
+                    data-product-id="WW-0080"
+                >
+
+                    <span class="option-check">
+                        ✓
+                    </span>
+
+                    <strong>
+                        ဒေါင်းဒင်္ဂါး
+                    </strong>
+
+                    <small>
+                        WW-0080
+                    </small>
+
+                    <b>
+                        38,000 MMK
+                    </b>
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- ========================================
+             ဓားဘူး
+        ========================================= -->
+
+        <div class="parikkhara-option-section">
+
+            <div class="parikkhara-choice-heading">
+
+                <span class="parikkhara-number">
+                    7
+                </span>
+
+                <div>
+                    <strong>
+                        ဓားဘူး
+                    </strong>
+
+                    <small>
+                        တစ်မျိုးရွေးချယ်ပါ
+                    </small>
+                </div>
+
+            </div>
+
+
+            <!-- Keep same ID for JS -->
+            <input
+                type="hidden"
+                id="parikkharaKnifeSelect"
+                value=""
+            >
+
+
+            <div class="parikkhara-option-cards">
+
+                <button
+                    type="button"
+                    class="parikkhara-option-card knife-option"
+                    data-product-id="WW-0123"
+                >
+
+                    <span class="option-check">
+                        ✓
+                    </span>
+
+                    <strong>
+                        ဒန် ဂျုပ်ဓားဘူး
+                    </strong>
+
+                    <small>
+                        WW-0123
+                    </small>
+
+                    <b>
+                        5,000 MMK
+                    </b>
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="parikkhara-option-card knife-option"
+                    data-product-id="WW-0124"
+                >
+
+                    <span class="option-check">
+                        ✓
+                    </span>
+
+                    <strong>
+                        စတီး ချုပ်ဓားဘူး
+                    </strong>
+
+                    <small>
+                        WW-0124
+                    </small>
+
+                    <b>
+                        6,000 MMK
+                    </b>
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- ========================================
+             AUTOMATICALLY INCLUDED
+        ========================================= -->
+
+        <div class="parikkhara-auto-section">
+
+            <div class="parikkhara-auto-header">
+
+                <div>
+                    <strong>
+                        ✓ အလိုအလျောက် ပါဝင်မည့်ပစ္စည်းများ
+                    </strong>
+
+                    <small>
+                        ထပ်မံရွေးချယ်ရန် မလိုပါ
+                    </small>
+                </div>
+
+            </div>
+
+
+            <div class="parikkhara-auto-grid">
+
+                <div
+                    class="parikkhara-auto-item"
+                    data-product-id="WW-0121"
+                >
+                    <span>✓</span>
+
+                    <div>
+                        <strong>
+                            TBE ခါးပန်းကြိုး
+                        </strong>
+
+                        <small>
+                            6,500 MMK
+                        </small>
+                    </div>
+                </div>
+
+
+                <div
+                    class="parikkhara-auto-item"
+                    data-product-id="WW-0084"
+                >
+                    <span>✓</span>
+
+                    <div>
+                        <strong>
+                            ချည်သပိတ်လွယ်
+                        </strong>
+
+                        <small>
+                            4,000 MMK
+                        </small>
+                    </div>
+                </div>
+
+
+                <div
+                    class="parikkhara-auto-item"
+                    data-product-id="WW-0088"
+                >
+                    <span>✓</span>
+
+                    <div>
+                        <strong>
+                            သပိတ်ခြေ
+                        </strong>
+
+                        <small>
+                            1,000 MMK
+                        </small>
+                    </div>
+                </div>
+
+
+                <div
+                    class="parikkhara-auto-item"
+                    data-product-id="WW-0126"
+                >
+                    <span>✓</span>
+
+                    <div>
+                        <strong>
+                            ရေစစ်
+                        </strong>
+
+                        <small>
+                            1,500 MMK
+                        </small>
+                    </div>
+                </div>
+
+
+                <div
+                    class="parikkhara-auto-item"
+                    data-product-id="WW-0127"
+                >
+                    <span>✓</span>
+
+                    <div>
+                        <strong>
+                            အပ်နှင့်အပ်ချည်
+                        </strong>
+
+                        <small>
+                            1,000 MMK
+                        </small>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ========================================
+             BOTTOM SUMMARY
+        ========================================= -->
+
+        <div class="parikkhara-bottom">
+
+            <div class="parikkhara-total">
+
+                <span>
+                    ပရိက္ခရာ စုစုပေါင်း
+                </span>
+
+                <strong id="parikkharaTotal">
+                    0 MMK
+                </strong>
+
+            </div>
+
+
+            <div class="parikkhara-actions">
+
+                <button
+                    id="cancelParikkharaButton"
+                    type="button"
+                >
+                    CANCEL
+                </button>
+
+                <button
+                    id="addParikkharaButton"
+                    type="button"
+                >
+                    အရောင်းထဲသို့ ထည့်မည်
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
 
     <!-- RECEIPT MODAL -->
 
@@ -355,7 +855,7 @@
 </div>
 
 
-    <script src="/pos/app.js?v=3"></script>
+    <script src="/pos/app.js?v=7"></script>
 
 </body>
 
