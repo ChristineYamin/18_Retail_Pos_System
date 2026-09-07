@@ -1293,7 +1293,7 @@ document
 document
     .getElementById("parikkharaRahanSelect")
     .addEventListener(
-        "change",
+        "input",
         function () {
 
             updateParikkharaSelectedInfo(
@@ -1310,7 +1310,7 @@ document
 document
     .getElementById("parikkharaDukoteSelect")
     .addEventListener(
-        "change",
+        "input",
         function () {
 
             updateParikkharaSelectedInfo(
