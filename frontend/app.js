@@ -871,6 +871,8 @@ function openParikkharaBuilder() {
 
     resetParikkharaBuilder();
 
+    refreshParikkharaOptionCards();
+
 
     document
         .getElementById("parikkharaModal")
@@ -1096,7 +1098,86 @@ function addParikkharaToCart() {
         "ပရိက္ခရာ ၈-ပါး အစုံကို Current Sale ထဲ ထည့်ပြီးပါပြီ။"
     );
 }
+// ========================================
+// REFRESH သပိတ် / ဓားဘူး PRICE + STOCK
+// ========================================
 
+function refreshParikkharaOptionCards() {
+
+    document
+        .querySelectorAll(".parikkhara-option-card")
+        .forEach(card => {
+
+            const productId =
+                card.dataset.productId;
+
+            const product =
+                getProductById(productId);
+
+            if (!product) {
+                return;
+            }
+
+
+            // Live database price
+            const priceElement =
+                card.querySelector("b");
+
+            if (priceElement) {
+
+                priceElement.textContent =
+                    Number(product.selling_price)
+                        .toLocaleString() + " MMK";
+            }
+
+
+            // Live database stock
+            let stockElement =
+                card.querySelector(
+                    ".parikkhara-card-stock"
+                );
+
+            if (!stockElement) {
+
+                stockElement =
+                    document.createElement("span");
+
+                stockElement.className =
+                    "parikkhara-card-stock";
+
+                card.appendChild(stockElement);
+            }
+
+
+            if (product.current_stock <= 0) {
+
+                stockElement.textContent =
+                    "OUT OF STOCK";
+
+                card.disabled = true;
+
+                card.classList.add(
+                    "parikkhara-card-out"
+                );
+
+                card.classList.remove(
+                    "selected"
+                );
+
+            } else {
+
+                stockElement.textContent =
+                    `Stock: ${product.current_stock}`;
+
+                card.disabled = false;
+
+                card.classList.remove(
+                    "parikkhara-card-out"
+                );
+            }
+
+        });
+}
 // ========================================
 // SELECT သပိတ် / ဓားဘူး CARDS
 // ========================================

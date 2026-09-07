@@ -4123,3 +4123,47 @@ select:focus {
     }
 
 }
+
+/* ========================================
+   ပရိက္ခရာ OPTION CARD STOCK
+======================================== */
+
+.parikkhara-card-stock {
+    display: inline-block;
+
+    margin-top: 5px;
+    padding: 4px 8px;
+
+    border-radius: 6px;
+
+    background: #F5EEDC;
+    color: #6B573F;
+
+    font-size: 10px;
+    font-weight: 700;
+}
+
+
+/* OUT OF STOCK CARD */
+
+.parikkhara-option-card.parikkhara-card-out {
+    opacity: 0.5;
+
+    background: #F3F0EB;
+
+    border-color: #D5CEC4;
+
+    cursor: not-allowed;
+
+    transform: none;
+}
+
+
+.parikkhara-option-card.parikkhara-card-out
+.parikkhara-card-stock {
+    background: #F8DFDA;
+
+    color: var(--shop-red);
+
+    font-weight: 900;
+}
