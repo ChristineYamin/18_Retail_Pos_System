@@ -68,8 +68,10 @@ function displayProducts(productList) {
                 ? "product-card out-of-stock"
                 : "product-card";
 
-        card.innerHTML = `
+        card.dataset.productId = product.product_id;
 
+        card.innerHTML = `
+            <div class="product-quantity-badge"></div>
             <div class="product-image-area">
 
     <img
@@ -133,6 +135,40 @@ function displayProducts(productList) {
 
         container.appendChild(card);
     });
+    updateProductQuantityBadges();
+}
+
+// ========================================
+// Update product quantity badges in the product list
+// ========================================
+function updateProductQuantityBadges() {
+
+    document
+        .querySelectorAll(".product-card")
+        .forEach(card => {
+
+            const productId = card.dataset.productId;
+
+            const cartItem = cart.find(
+                item => item.product_id === productId
+            );
+
+            const badge =
+                card.querySelector(".product-quantity-badge");
+
+            if (!badge) return;
+
+            if (cartItem && cartItem.quantity > 0) {
+
+                badge.textContent = `×${cartItem.quantity}`;
+                badge.classList.add("show");
+
+            } else {
+
+                badge.textContent = "";
+                badge.classList.remove("show");
+            }
+        });
 }
     
 // ========================================
@@ -214,6 +250,8 @@ function displayCart() {
     const container = document.getElementById("cartList");
 
     container.innerHTML = "";
+
+    updateProductQuantityBadges();
 
     if (cart.length === 0) {
         container.innerHTML =
