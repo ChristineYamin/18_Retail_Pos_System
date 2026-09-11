@@ -4167,3 +4167,50 @@ select:focus {
 
     font-weight: 900;
 }
+
+/* ========================================
+   TABLET THERMAL PRINT - LARGER TEXT
+======================================== */
+
+@media print {
+
+    .receipt-header h2 {
+        font-size: 21px !important;
+    }
+
+    .receipt-subtitle {
+        font-size: 12px !important;
+    }
+
+    .receipt-shop-info {
+        font-size: 12px !important;
+        line-height: 1.6 !important;
+    }
+
+    .receipt-info {
+        font-size: 12px !important;
+    }
+
+    .receipt-item-name {
+        font-size: 13px !important;
+        font-weight: 800 !important;
+    }
+
+    .receipt-item-details {
+        font-size: 12px !important;
+    }
+
+    .receipt-total-row {
+        font-size: 12px !important;
+    }
+
+    .receipt-grand-total {
+        font-size: 16px !important;
+        font-weight: 900 !important;
+    }
+
+    .receipt-thanks {
+        font-size: 12px !important;
+        line-height: 1.7 !important;
+    }
+}
